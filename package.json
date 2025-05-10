@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "node-fetch": "^2",
+    "now-php": "^0.0.10",
     "vercel": "^41.7.3"
   },
   "engines": {

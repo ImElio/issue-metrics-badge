@@ -1,0 +1,16 @@
+{
+  "name": "gh-issue-badge",
+  "version": "1.0.0",
+  "description": "🐞 Dynamically generated GitHub issue badges — customizable, themeable, and Vercel-ready",
+  "main": "api/issues-badge.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "node-fetch": "^2",
+    "vercel": "^41.7.3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

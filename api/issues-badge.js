@@ -10,11 +10,14 @@ module.exports = async (req, res) => {
 
   const sendError = (title, msg) => {
     res.setHeader('Content-Type', 'image/svg+xml');
-    return res.send(renderError(title, msg, theme, {
-      openCount: 0,
-      todayCount: 0,
-      labelCounts: {}
-    }));
+    return res.send(
+      renderError(
+        title,
+        msg,
+        theme,
+        { openCount: 0, todayCount: 0, labelCounts: {} }
+      )
+    );
   };
 
   if (!repo) {
@@ -34,12 +37,21 @@ module.exports = async (req, res) => {
 
   try {
     const { openCount, todayCount, labelCounts } = await getIssues(owner, repoName, labels);
+
     res.setHeader('Content-Type', 'image/svg+xml');
     res.setHeader('Cache-Control', 's-maxage=300');
-    return res.send(renderBadge({ openCount, todayCount, labelCounts, theme: selectedTheme }));
+    return res.send(
+      renderBadge({
+        openCount,
+        todayCount,
+        labelCounts,
+        theme: selectedTheme
+      })
+    );
   } catch (err) {
     let title = 'Internal Error';
     let msg   = 'Something went wrong';
+
     if (err.message === 'not_found') {
       title = 'Repository not found';
       msg   = 'Check username/repo';
@@ -47,6 +59,7 @@ module.exports = async (req, res) => {
       title = 'Rate limit exceeded';
       msg   = 'Use a GitHub token';
     }
+
     return sendError(title, msg);
   }
 };
